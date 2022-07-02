@@ -6,17 +6,15 @@ import (
 )
 
 //flagsUtility is slice of flags the utility
-var flagsUtility = []string{"-host", "-user", "-pass", "-db", "-P", "-format"}
+var flagsUtility = []string{"-host", "-u", "-p", "-db", "-P", "-f"}
 
 //VerifyFlags execute verification for flags
 func VerifyFlags(flags map[string]string) error {
-	for key, value := range flags {
+	for key, _ := range flags {
 		if err := contains(flagsUtility, key); err != nil {
 			return err
 		}
-		if err := empty(key, value); err != nil {
-			return err
-		}
+
 	}
 	return nil
 }
@@ -26,7 +24,6 @@ func contains(flags []string, name string) error {
 	existed := false
 	var flg string
 	for _, flag := range flags {
-		fmt.Printf("flag: %s, name: %s\n", flag, name)
 		if flag == name {
 			existed = true
 			flg = flag
