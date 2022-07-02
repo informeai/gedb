@@ -10,8 +10,8 @@ databases to files in formats.(eg: json,csv)
 `
 
 	Usage = `
-usage: gedb [DRIVER] [COMMAND] [-host] [-user <username>] [-pass <password>]
-[-db <database>] [-P <port>]
+usage: gedb [COMMAND] [DRIVER] [-host] [-u <username>] [-p <password>]
+[-db <database>] [-P <port>] [-f <format>]
 
 These are drives:
 - mysql
