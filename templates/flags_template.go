@@ -11,7 +11,7 @@ databases to files in formats.(eg: json,csv)
 
 	Usage = `
 usage: gedb [DRIVER] [COMMAND] [-host] [-user <username>] [-pass <password>]
-[-db <database>]
+[-db <database>] [-P <port>]
 
 These are drives:
 - mysql
