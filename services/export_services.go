@@ -27,11 +27,11 @@ func (e *ExportService) Export() error {
 	}
 	switch e.Driver {
 	case "mysql":
-		connector := libs.NewMysqlConnector(e.Flags["-db"], e.Flags["-user"], e.Flags["-pass"], e.Flags["-host"], "3306")
+		connector := libs.NewMysqlConnector(e.Flags["-db"], e.Flags["-u"], e.Flags["-p"], e.Flags["-host"], e.Flags["-P"])
 		if err := connector.Connect(); err != nil {
 			return err
 		}
-		if err := connector.Export(e.Flags["-format"]); err != nil {
+		if err := connector.Export(e.Flags["-f"]); err != nil {
 			return err
 		}
 		if err := connector.Close(); err != nil {
