@@ -148,12 +148,36 @@ func (m *MysqlConnector) ListTables() (err error) {
 }
 
 //Export save data of tables in files
-func (m *MysqlConnector) Export(format string) (err error) {
+func (m *MysqlConnector) Export(format string, query string) (err error) {
 	if err = m.getTables(); err != nil {
 		return err
 	}
 	switch format {
 	case "json":
+		if query != "" {
+
+			f, err := os.Create(fmt.Sprintf("./%s.%s", "result", format))
+			if err != nil {
+				return err
+			}
+
+			json_data, err := m.getJSON(query)
+			if err != nil {
+				return err
+			}
+
+			bytes_content := []byte(json_data)
+			if _, err = f.Write(bytes_content); err != nil {
+				return err
+			}
+			if err = f.Sync(); err != nil {
+				return err
+			}
+			if err = f.Close(); err != nil {
+				return err
+			}
+			break
+		}
 		for _, table := range m.tables {
 			f, err := os.Create(fmt.Sprintf("./%s.%s", table, format))
 			if err != nil {
@@ -176,6 +200,30 @@ func (m *MysqlConnector) Export(format string) (err error) {
 		}
 		break
 	case "csv":
+		if query != "" {
+
+			f, err := os.Create(fmt.Sprintf("./%s.%s", "result", format))
+			if err != nil {
+				return err
+			}
+
+			csv_data, err := m.getCSV(query)
+			if err != nil {
+				return err
+			}
+
+			bytes_content := []byte(csv_data)
+			if _, err = f.Write(bytes_content); err != nil {
+				return err
+			}
+			if err = f.Sync(); err != nil {
+				return err
+			}
+			if err = f.Close(); err != nil {
+				return err
+			}
+			break
+		}
 		for _, table := range m.tables {
 			f, err := os.Create(fmt.Sprintf("./%s.%s", table, format))
 			if err != nil {
@@ -185,6 +233,7 @@ func (m *MysqlConnector) Export(format string) (err error) {
 			if err != nil {
 				return err
 			}
+
 			bytes_content := []byte(csv_data)
 			if _, err = f.Write(bytes_content); err != nil {
 				return err
