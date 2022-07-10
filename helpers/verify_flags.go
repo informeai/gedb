@@ -6,7 +6,7 @@ import (
 )
 
 //flagsUtility is slice of flags the utility
-var flagsUtility = []string{"-host", "-u", "-p", "-db", "-P", "-f"}
+var flagsUtility = []string{"-host", "-u", "-p", "-db", "-P", "-f", "-q"}
 
 //VerifyFlags execute verification for flags
 func VerifyFlags(flags map[string]string) error {
