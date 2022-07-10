@@ -31,7 +31,7 @@ func (e *ExportService) Export() error {
 		if err := connector.Connect(); err != nil {
 			return err
 		}
-		if err := connector.Export(e.Flags["-f"]); err != nil {
+		if err := connector.Export(e.Flags["-f"], e.Flags["-q"]); err != nil {
 			return err
 		}
 		if err := connector.Close(); err != nil {
