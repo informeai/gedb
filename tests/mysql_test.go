@@ -49,7 +49,7 @@ func TestMysqlExport(t *testing.T) {
 		t.Errorf("TestMysqlExport: expect: != nil, got: %s\n", err.Error())
 	}
 	for _, value := range []string{"json", "csv"} {
-		err = mysql_connector.Export(value)
+		err = mysql_connector.Export("", value)
 		if err != nil {
 			t.Errorf("TestMysqlExport: expect: != nil, got: %s\n", err.Error())
 		}
