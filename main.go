@@ -17,6 +17,7 @@ var (
 	pass   string
 	format string
 	port   string
+	query  string
 )
 
 func main() {
@@ -33,6 +34,7 @@ func main() {
 	setFlags.StringVar(&pass, "p", "", "password of connection")
 	setFlags.StringVar(&format, "f", "json", "format to export")
 	setFlags.StringVar(&port, "P", "", "port to connection")
+	setFlags.StringVar(&query, "q", "", "query for search")
 	setFlags.Parse(os.Args[3:])
 
 	flags := map[string]string{
@@ -42,6 +44,7 @@ func main() {
 		"-p":    pass,
 		"-f":    format,
 		"-P":    port,
+		"-q":    query,
 	}
 	if os.Args[1] != "export" {
 		log.Println("command not permited")
